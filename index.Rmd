@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "Maya Bodnick"
-description: "My final project"
+description: "My final project" 
 output:
   distill::distill_article:
     self_contained: false
