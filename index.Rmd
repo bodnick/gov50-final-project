@@ -1,6 +1,6 @@
 ---
 title: "Gov 50 Final Project"
-author: "Your Name Here"
+author: "Maya Bodnick"
 description: "My final project"
 output:
   distill::distill_article:
@@ -11,4 +11,4 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to...
+I am interested in exploring data related to political science, economics, and sports. I have a lot of ideas related to sports. I might look into the home court advantage in professional sports; this is my favorite idea. I could also look into salary caps in the NBA: how does the distribution of player salaries within a team affect its performance in the NBA? ANother idea -- what is the short-term and long-term economic impact on cities that host major sports events, like the Olympics or the FIFA World Cup?
