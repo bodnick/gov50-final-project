@@ -21,9 +21,13 @@ long_wins_table <- wins_table |>
 
 wins_barplot <- ggplot(long_wins_table, aes(x = SEASON, y = percentage, fill = win_type)) +
   geom_bar(stat="identity", position="stack") +
-  labs(title = "Home vs. Away Team Wins by Season",
-       y = "Percentage of Wins",
+  labs(title = "The home team consistently wins more than half of games in the NBA",
+       y = "Percentage of wins",
        x = "Season") +
+  scale_fill_manual(values = c("percentage_home_team_wins" = "#3498db", 
+                               "percentage_away_team_wins" = "#e74c3c"),
+                    labels = c("Home team", "Visiting team"),
+                    name = "Win rate type")
   theme_minimal()
 
 wins_barplot

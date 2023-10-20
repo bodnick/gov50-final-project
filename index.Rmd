@@ -22,3 +22,39 @@ https://www.amazon.com/Scorecasting-Hidden-Influences-Behind-Sports/dp/030759180
 https://www.sciencedirect.com/science/article/abs/pii/S1469029201000334
 https://www.kaggle.com/datasets/nathanlauga/nba-games
 
+```{r}
+
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+
+games <- read_csv("games.csv")
+
+wins_table <- games |>
+  group_by(SEASON) |>
+  summarize(percentage_home_team_wins = mean(HOME_TEAM_WINS),
+            percentage_away_team_wins = 1 - mean(HOME_TEAM_WINS)
+  )
+
+long_wins_table <- wins_table |>
+  pivot_longer(
+    cols = c(percentage_home_team_wins, percentage_away_team_wins),
+    names_to = "win_type",
+    values_to = "percentage"
+  )
+
+wins_barplot <- ggplot(long_wins_table, aes(x = SEASON, y = percentage, fill = win_type)) +
+  geom_bar(stat="identity", position="stack") +
+  labs(title = "The home team consistently wins more than half of games in the NBA",
+       y = "Percentage of wins",
+       x = "Season") +
+  scale_fill_manual(values = c("percentage_home_team_wins" = "#3498db", 
+                               "percentage_away_team_wins" = "#e74c3c"),
+                    labels = c("Home team", "Visiting team"),
+                    name = "Win rate type")
+  theme_minimal()
+
+wins_barplot
+
+```
+
