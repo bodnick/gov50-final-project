@@ -94,10 +94,10 @@ games
 
 Based on this data, I created three visualizations:
 
-```{r wins-plot, echo=FALSE, fig.path="images/"}
-print(wins_barplot)
-print(points_barplot)
-print(ft_barplot)
+```{r}
+wins_barplot
+points_barplot
+ft_barplot
 ```
 
 
