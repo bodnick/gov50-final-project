@@ -94,7 +94,7 @@ games
 
 Based on this data, I created three visualizations:
 
-```{r, echo=FALSE}
+```{r wins-plot, echo=FALSE, fig.path="images/"}
 wins_barplot
 points_barplot
 ft_barplot
