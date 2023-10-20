@@ -22,7 +22,7 @@ https://www.amazon.com/Scorecasting-Hidden-Influences-Behind-Sports/dp/030759180
 https://www.sciencedirect.com/science/article/abs/pii/S1469029201000334
 https://www.kaggle.com/datasets/nathanlauga/nba-games
 
-```{r}
+```{r echo=FALSE}
 
 library(tidyverse)
 library(dplyr)
