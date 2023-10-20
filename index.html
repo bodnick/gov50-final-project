@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["coding.nb.html","games_details.csv","games.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","players.csv","teams.csv"]}
+  {"type":"character","attributes":{},"value":["coding.nb.html","games_details.csv","games.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-2-2.png","index_files/figure-html5/unnamed-chunk-2-3.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-3-2.png","index_files/figure-html5/unnamed-chunk-3-3.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","players.csv","teams.csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1525,398 +1525,59 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a href="https://www.amazon.com/Scorecasting-Hidden-Influences-Behind-Sports/dp/0307591808" class="uri">https://www.amazon.com/Scorecasting-Hidden-Influences-Behind-Sports/dp/0307591808</a>
 <a href="https://www.sciencedirect.com/science/article/abs/pii/S1469029201000334" class="uri">https://www.sciencedirect.com/science/article/abs/pii/S1469029201000334</a>
 <a href="https://www.kaggle.com/datasets/nathanlauga/nba-games" class="uri">https://www.kaggle.com/datasets/nathanlauga/nba-games</a></p>
+<p>Milestone 3:</p>
+<p>Here’s my first data set, which includes statistics on final scores and free throw percentages.</p>
 <div class="layout-chunk" data-layout="l-body">
-<pre><code>List of 97
- $ line                      :List of 6
-  ..$ colour       : chr &quot;black&quot;
-  ..$ linewidth    : num 0.5
-  ..$ linetype     : num 1
-  ..$ lineend      : chr &quot;butt&quot;
-  ..$ arrow        : logi FALSE
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_line&quot; &quot;element&quot;
- $ rect                      :List of 5
-  ..$ fill         : chr &quot;white&quot;
-  ..$ colour       : chr &quot;black&quot;
-  ..$ linewidth    : num 0.5
-  ..$ linetype     : num 1
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_rect&quot; &quot;element&quot;
- $ text                      :List of 11
-  ..$ family       : chr &quot;&quot;
-  ..$ face         : chr &quot;plain&quot;
-  ..$ colour       : chr &quot;black&quot;
-  ..$ size         : num 11
-  ..$ hjust        : num 0.5
-  ..$ vjust        : num 0.5
-  ..$ angle        : num 0
-  ..$ lineheight   : num 0.9
-  ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 0points 0points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : logi FALSE
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ title                     : NULL
- $ aspect.ratio              : NULL
- $ axis.title                : NULL
- $ axis.title.x              :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 1
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 2.75points 0points 0points 0points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ axis.title.x.top          :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 0
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 2.75points 0points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ axis.title.x.bottom       : NULL
- $ axis.title.y              :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 1
-  ..$ angle        : num 90
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 0points 2.75points 0points 0points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ axis.title.y.left         : NULL
- $ axis.title.y.right        :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 0
-  ..$ angle        : num -90
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 0points 2.75points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ axis.text                 :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : chr &quot;grey30&quot;
-  ..$ size         : &#39;rel&#39; num 0.8
-  ..$ hjust        : NULL
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : NULL
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ axis.text.x               :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 1
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 2.2points 0points 0points 0points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ axis.text.x.top           :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 0
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 2.2points 0points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ axis.text.x.bottom        : NULL
- $ axis.text.y               :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : num 1
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 0points 2.2points 0points 0points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ axis.text.y.left          : NULL
- $ axis.text.y.right         :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : num 0
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 0points 2.2points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ axis.ticks                : list()
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
- $ axis.ticks.x              : NULL
- $ axis.ticks.x.top          : NULL
- $ axis.ticks.x.bottom       : NULL
- $ axis.ticks.y              : NULL
- $ axis.ticks.y.left         : NULL
- $ axis.ticks.y.right        : NULL
- $ axis.ticks.length         : &#39;simpleUnit&#39; num 2.75points
-  ..- attr(*, &quot;unit&quot;)= int 8
- $ axis.ticks.length.x       : NULL
- $ axis.ticks.length.x.top   : NULL
- $ axis.ticks.length.x.bottom: NULL
- $ axis.ticks.length.y       : NULL
- $ axis.ticks.length.y.left  : NULL
- $ axis.ticks.length.y.right : NULL
- $ axis.line                 : list()
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
- $ axis.line.x               : NULL
- $ axis.line.x.top           : NULL
- $ axis.line.x.bottom        : NULL
- $ axis.line.y               : NULL
- $ axis.line.y.left          : NULL
- $ axis.line.y.right         : NULL
- $ legend.background         : list()
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
- $ legend.margin             : &#39;margin&#39; num [1:4] 5.5points 5.5points 5.5points 5.5points
-  ..- attr(*, &quot;unit&quot;)= int 8
- $ legend.spacing            : &#39;simpleUnit&#39; num 11points
-  ..- attr(*, &quot;unit&quot;)= int 8
- $ legend.spacing.x          : NULL
- $ legend.spacing.y          : NULL
- $ legend.key                : list()
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
- $ legend.key.size           : &#39;simpleUnit&#39; num 1.2lines
-  ..- attr(*, &quot;unit&quot;)= int 3
- $ legend.key.height         : NULL
- $ legend.key.width          : NULL
- $ legend.text               :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : &#39;rel&#39; num 0.8
-  ..$ hjust        : NULL
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : NULL
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ legend.text.align         : NULL
- $ legend.title              :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : num 0
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : NULL
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ legend.title.align        : NULL
- $ legend.position           : chr &quot;right&quot;
- $ legend.direction          : NULL
- $ legend.justification      : chr &quot;center&quot;
- $ legend.box                : NULL
- $ legend.box.just           : NULL
- $ legend.box.margin         : &#39;margin&#39; num [1:4] 0cm 0cm 0cm 0cm
-  ..- attr(*, &quot;unit&quot;)= int 1
- $ legend.box.background     : list()
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
- $ legend.box.spacing        : &#39;simpleUnit&#39; num 11points
-  ..- attr(*, &quot;unit&quot;)= int 8
- $ panel.background          : list()
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
- $ panel.border              : list()
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
- $ panel.spacing             : &#39;simpleUnit&#39; num 5.5points
-  ..- attr(*, &quot;unit&quot;)= int 8
- $ panel.spacing.x           : NULL
- $ panel.spacing.y           : NULL
- $ panel.grid                :List of 6
-  ..$ colour       : chr &quot;grey92&quot;
-  ..$ linewidth    : NULL
-  ..$ linetype     : NULL
-  ..$ lineend      : NULL
-  ..$ arrow        : logi FALSE
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_line&quot; &quot;element&quot;
- $ panel.grid.major          : NULL
- $ panel.grid.minor          :List of 6
-  ..$ colour       : NULL
-  ..$ linewidth    : &#39;rel&#39; num 0.5
-  ..$ linetype     : NULL
-  ..$ lineend      : NULL
-  ..$ arrow        : logi FALSE
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_line&quot; &quot;element&quot;
- $ panel.grid.major.x        : NULL
- $ panel.grid.major.y        : NULL
- $ panel.grid.minor.x        : NULL
- $ panel.grid.minor.y        : NULL
- $ panel.ontop               : logi FALSE
- $ plot.background           : list()
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
- $ plot.title                :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : &#39;rel&#39; num 1.2
-  ..$ hjust        : num 0
-  ..$ vjust        : num 1
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 5.5points 0points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ plot.title.position       : chr &quot;panel&quot;
- $ plot.subtitle             :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : num 0
-  ..$ vjust        : num 1
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 0points 0points 5.5points 0points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ plot.caption              :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : &#39;rel&#39; num 0.8
-  ..$ hjust        : num 1
-  ..$ vjust        : num 1
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 5.5points 0points 0points 0points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ plot.caption.position     : chr &quot;panel&quot;
- $ plot.tag                  :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : &#39;rel&#39; num 1.2
-  ..$ hjust        : num 0.5
-  ..$ vjust        : num 0.5
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : NULL
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ plot.tag.position         : chr &quot;topleft&quot;
- $ plot.margin               : &#39;margin&#39; num [1:4] 5.5points 5.5points 5.5points 5.5points
-  ..- attr(*, &quot;unit&quot;)= int 8
- $ strip.background          : list()
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
- $ strip.background.x        : NULL
- $ strip.background.y        : NULL
- $ strip.clip                : chr &quot;inherit&quot;
- $ strip.placement           : chr &quot;inside&quot;
- $ strip.text                :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : chr &quot;grey10&quot;
-  ..$ size         : &#39;rel&#39; num 0.8
-  ..$ hjust        : NULL
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : &#39;margin&#39; num [1:4] 4.4points 4.4points 4.4points 4.4points
-  .. ..- attr(*, &quot;unit&quot;)= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ strip.text.x              : NULL
- $ strip.text.x.bottom       : NULL
- $ strip.text.x.top          : NULL
- $ strip.text.y              :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : NULL
-  ..$ angle        : num -90
-  ..$ lineheight   : NULL
-  ..$ margin       : NULL
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ strip.text.y.left         :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : NULL
-  ..$ angle        : num 90
-  ..$ lineheight   : NULL
-  ..$ margin       : NULL
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
- $ strip.text.y.right        : NULL
- $ strip.switch.pad.grid     : &#39;simpleUnit&#39; num 2.75points
-  ..- attr(*, &quot;unit&quot;)= int 8
- $ strip.switch.pad.wrap     : &#39;simpleUnit&#39; num 2.75points
-  ..- attr(*, &quot;unit&quot;)= int 8
- - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
- - attr(*, &quot;complete&quot;)= logi TRUE
- - attr(*, &quot;validate&quot;)= logi TRUE</code></pre>
-<p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+<pre><code># A tibble: 26,651 × 21
+   GAME_DATE_EST GAME_ID GAME_STATUS_TEXT HOME_TEAM_ID VISITOR_TEAM_ID
+   &lt;date&gt;          &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt;           &lt;dbl&gt;
+ 1 2022-12-22     2.22e7 Final              1610612740      1610612759
+ 2 2022-12-22     2.22e7 Final              1610612762      1610612764
+ 3 2022-12-21     2.22e7 Final              1610612739      1610612749
+ 4 2022-12-21     2.22e7 Final              1610612755      1610612765
+ 5 2022-12-21     2.22e7 Final              1610612737      1610612741
+ 6 2022-12-21     2.22e7 Final              1610612738      1610612754
+ 7 2022-12-21     2.22e7 Final              1610612751      1610612744
+ 8 2022-12-21     2.22e7 Final              1610612752      1610612761
+ 9 2022-12-21     2.22e7 Final              1610612745      1610612753
+10 2022-12-21     2.22e7 Final              1610612750      1610612742
+# ℹ 26,641 more rows
+# ℹ 16 more variables: SEASON &lt;dbl&gt;, TEAM_ID_home &lt;dbl&gt;,
+#   PTS_home &lt;dbl&gt;, FG_PCT_home &lt;dbl&gt;, FT_PCT_home &lt;dbl&gt;,
+#   FG3_PCT_home &lt;dbl&gt;, AST_home &lt;dbl&gt;, REB_home &lt;dbl&gt;,
+#   TEAM_ID_away &lt;dbl&gt;, PTS_away &lt;dbl&gt;, FG_PCT_away &lt;dbl&gt;,
+#   FT_PCT_away &lt;dbl&gt;, FG3_PCT_away &lt;dbl&gt;, AST_away &lt;dbl&gt;,
+#   REB_away &lt;dbl&gt;, HOME_TEAM_WINS &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Based on this data, I created three visualizations:</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-3-2.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-3-3.png" width="624" /></p>
+</div>
+<p>In addition to these metrics, I want to look at personal fouls called on each team, which is in my second data set:</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code># A tibble: 668,628 × 29
+    GAME_ID  TEAM_ID TEAM_ABBREVIATION TEAM_CITY PLAYER_ID PLAYER_NAME
+      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;      
+ 1 22200477   1.61e9 SAS               San Anto…   1629641 Romeo Lang…
+ 2 22200477   1.61e9 SAS               San Anto…   1631110 Jeremy Soc…
+ 3 22200477   1.61e9 SAS               San Anto…   1627751 Jakob Poel…
+ 4 22200477   1.61e9 SAS               San Anto…   1630170 Devin Vass…
+ 5 22200477   1.61e9 SAS               San Anto…   1630200 Tre Jones  
+ 6 22200477   1.61e9 SAS               San Anto…   1628380 Zach Colli…
+ 7 22200477   1.61e9 SAS               San Anto…    203926 Doug McDer…
+ 8 22200477   1.61e9 SAS               San Anto…   1626196 Josh Richa…
+ 9 22200477   1.61e9 SAS               San Anto…   1631103 Malaki Bra…
+10 22200477   1.61e9 SAS               San Anto…   1628966 Keita Bate…
+# ℹ 668,618 more rows
+# ℹ 23 more variables: NICKNAME &lt;chr&gt;, START_POSITION &lt;chr&gt;,
+#   COMMENT &lt;chr&gt;, MIN &lt;chr&gt;, FGM &lt;dbl&gt;, FGA &lt;dbl&gt;, FG_PCT &lt;dbl&gt;,
+#   FG3M &lt;dbl&gt;, FG3A &lt;dbl&gt;, FG3_PCT &lt;dbl&gt;, FTM &lt;dbl&gt;, FTA &lt;dbl&gt;,
+#   FT_PCT &lt;dbl&gt;, OREB &lt;dbl&gt;, DREB &lt;dbl&gt;, REB &lt;dbl&gt;, AST &lt;dbl&gt;,
+#   STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TO &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;,
+#   PLUS_MINUS &lt;dbl&gt;</code></pre>
+</div>
+<p>I’ll have to do a lot of data cleaning to get that statistic in the form I need, which I will do in the future (or potentially decide not to focus on this additional metric).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

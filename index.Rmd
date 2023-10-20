@@ -22,13 +22,16 @@ https://www.amazon.com/Scorecasting-Hidden-Influences-Behind-Sports/dp/030759180
 https://www.sciencedirect.com/science/article/abs/pii/S1469029201000334
 https://www.kaggle.com/datasets/nathanlauga/nba-games
 
-```{r echo=FALSE}
+Milestone 3:
+
+```{r, include=FALSE}
 
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
 
 games <- read_csv("games.csv")
+fouls <- read_csv("games_details.csv")
 
 wins_table <- games |>
   group_by(SEASON) |>
@@ -45,16 +48,65 @@ long_wins_table <- wins_table |>
 
 wins_barplot <- ggplot(long_wins_table, aes(x = SEASON, y = percentage, fill = win_type)) +
   geom_bar(stat="identity", position="stack") +
-  labs(title = "The home team consistently wins more than half of games in the NBA",
+  labs(title = "Home teams consistently win more than half of games",
        y = "Percentage of wins",
-       x = "Season") +
+       x = "NBA season") +
   scale_fill_manual(values = c("percentage_home_team_wins" = "#3498db", 
                                "percentage_away_team_wins" = "#e74c3c"),
                     labels = c("Home team", "Visiting team"),
                     name = "Win rate type")
   theme_minimal()
+  
+points_table <- games |>
+  group_by(SEASON) |>
+  summarize(avg_score_difference = mean(PTS_home, na.rm = TRUE) - 
+              mean(PTS_away, na.rm = TRUE)
+  )
 
-wins_barplot
+points_barplot <- ggplot(points_table, aes(x = SEASON, y = avg_score_difference)) +
+  geom_bar(stat="identity", fill="#3498db") +
+  labs(title = "Home teams consistently scores more points than visiting teams",
+       y = "Average points advantage for the home team",
+       x = "NBA season") +
+  theme_minimal()
+
+ft_table <- games |>
+  group_by(SEASON) |>
+  summarize(avg_ft_difference = (mean(FT_PCT_home, na.rm = TRUE)) - 
+              (mean(FT_PCT_away, na.rm = TRUE))
+  )
+
+ft_barplot <- ggplot(ft_table, aes(x = SEASON, y = avg_ft_difference)) +
+  geom_bar(stat="identity", fill="#e74c3c") + 
+  geom_hline(yintercept = 0, linetype="dashed", color="black") +  # Adds a horizontal line at 0 for reference
+  labs(title = "Home teams often make slightly more free throws than visiting teams",
+       y = "Average FT% difference",
+       x = "NBA season") +
+  theme_minimal()
 
 ```
+
+Here's my first data set, which includes statistics on final scores and free throw percentages. 
+
+```{r, echo=FALSE}
+games
+```
+
+Based on this data, I created three visualizations:
+
+```{r, echo=FALSE}
+wins_barplot
+points_barplot
+ft_barplot
+```
+
+
+In addition to these metrics, I want to look at personal fouls called on each team, which is in my second data set:
+
+```{r, echo=FALSE}
+fouls
+```
+
+I'll have to do a lot of data cleaning to get that statistic in the form I need, which I will do in the future (or potentially decide not to focus on this additional metric).
+
 
