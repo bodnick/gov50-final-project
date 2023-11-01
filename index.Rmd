@@ -31,7 +31,7 @@ games <- read_csv("games.csv")
 fouls <- read_csv("games_details.csv")
 ```
 
-Here's my first data set, which includes statistics on final scores and free throw percentages. 
+Here's my data set, which includes statistics on final scores and free throw percentages. 
 
 ```{r, echo=FALSE}
 games
@@ -47,14 +47,5 @@ points_barplot
 load("ft_barplot.RData")
 ft_barplot
 ```
-
-
-In addition to these metrics, I want to look at personal fouls called on each team, which is in my second data set:
-
-```{r, echo=FALSE}
-fouls
-```
-
-I'll have to do a lot of data cleaning to get that statistic in the form I need, which I will do in the future (or potentially decide not to focus on this additional metric).
 
 
