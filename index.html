@@ -1527,7 +1527,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a href="https://www.sciencedirect.com/science/article/abs/pii/S1469029201000334" class="uri">https://www.sciencedirect.com/science/article/abs/pii/S1469029201000334</a>
 <a href="https://www.kaggle.com/datasets/nathanlauga/nba-games" class="uri">https://www.kaggle.com/datasets/nathanlauga/nba-games</a></p>
 <p>Milestone 3:</p>
-<p>Here’s my first data set, which includes statistics on final scores and free throw percentages.</p>
+<p>Here’s my data set, which includes statistics on final scores and free throw percentages.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code># A tibble: 26,651 × 21
    GAME_DATE_EST GAME_ID GAME_STATUS_TEXT HOME_TEAM_ID VISITOR_TEAM_ID
@@ -1553,34 +1553,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Based on this data, I created three visualizations:</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-2-2.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-2-3.png" width="624" /></p>
-</div>
-<p>In addition to these metrics, I want to look at personal fouls called on each team, which is in my second data set:</p>
-<div class="layout-chunk" data-layout="l-body">
-<pre><code># A tibble: 668,628 × 29
-    GAME_ID  TEAM_ID TEAM_ABBREVIATION TEAM_CITY PLAYER_ID PLAYER_NAME
-      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;      
- 1 22200477   1.61e9 SAS               San Anto…   1629641 Romeo Lang…
- 2 22200477   1.61e9 SAS               San Anto…   1631110 Jeremy Soc…
- 3 22200477   1.61e9 SAS               San Anto…   1627751 Jakob Poel…
- 4 22200477   1.61e9 SAS               San Anto…   1630170 Devin Vass…
- 5 22200477   1.61e9 SAS               San Anto…   1630200 Tre Jones  
- 6 22200477   1.61e9 SAS               San Anto…   1628380 Zach Colli…
- 7 22200477   1.61e9 SAS               San Anto…    203926 Doug McDer…
- 8 22200477   1.61e9 SAS               San Anto…   1626196 Josh Richa…
- 9 22200477   1.61e9 SAS               San Anto…   1631103 Malaki Bra…
-10 22200477   1.61e9 SAS               San Anto…   1628966 Keita Bate…
-# ℹ 668,618 more rows
-# ℹ 23 more variables: NICKNAME &lt;chr&gt;, START_POSITION &lt;chr&gt;,
-#   COMMENT &lt;chr&gt;, MIN &lt;chr&gt;, FGM &lt;dbl&gt;, FGA &lt;dbl&gt;, FG_PCT &lt;dbl&gt;,
-#   FG3M &lt;dbl&gt;, FG3A &lt;dbl&gt;, FG3_PCT &lt;dbl&gt;, FTM &lt;dbl&gt;, FTA &lt;dbl&gt;,
-#   FT_PCT &lt;dbl&gt;, OREB &lt;dbl&gt;, DREB &lt;dbl&gt;, REB &lt;dbl&gt;, AST &lt;dbl&gt;,
-#   STL &lt;dbl&gt;, BLK &lt;dbl&gt;, TO &lt;dbl&gt;, PF &lt;dbl&gt;, PTS &lt;dbl&gt;,
-#   PLUS_MINUS &lt;dbl&gt;</code></pre>
-</div>
-<p>I’ll have to do a lot of data cleaning to get that statistic in the form I need, which I will do in the future (or potentially decide not to focus on this additional metric).</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<!--radix_placeholder_article_footer-->
-<!--/radix_placeholder_article_footer-->
 </div>
 
 <div class="d-appendix">
