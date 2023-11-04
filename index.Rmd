@@ -50,16 +50,32 @@ ft_barplot
 
 Milestone 4:
 
-From 2014-2022 in the NBA, home teams won 58.70% of the time. I ran a univariate regression with whether a team was playing at home (1 if they were the home team, 0 if they were the visting team) as my independent variable and their score as the dependent variable. Here
+From 2014-2022 in the NBA, home teams won 58.70% of the time. I ran a univariate regression with whether a team was playing at home (1 if they were the home team, 0 if they were the visiting team) as my independent variable and their score as the dependent variable. Here are the results:
+
+```{r, echo=FALSE}
+load("pts_table_formatted.RData")
+pts_table_formatted
+```
+
+According to the model, the home team enjoyed an average of a 2.82 point advantage from 2014-2022, which is significant at p < 0.05 (p = 1.39e-129, a very tiny number, so the results are very significant). Therefore, the home court advantage clearly exists, with the home team having a moderate but significant points advantage over the visiting team.
+
+I also ran a regression with with whether a team was playing at home (1 if they were the home team, 0 if they were the visiting team) as my independent variable and their free throw rate as the dependent variable. Here are the results:
 
 ```{r, echo=FALSE}
 load("ft_table_formatted.RData")
 ft_table_formatted
-load("pts_table_formatted.RData")
-pts_table_formatted
-
-
 ```
+
+According to the model, the home team scored 0.16% more free throws than the visiting team on average from 2014-2022. This is a small advantage and the p-value is 0.078, which is not significant at p < 0.05. This means that if the null hypothesis is true, you would still expect to see the relationship observed about 7.8% of the time purely due to random chance. Therefore, there is a small, weak relationship between whether a team is playing at home and their free throw rate (or maybe none at all).
+
+Free throw percentages are the most direct way to measure the impact of the crowd on the players (even though it probably impacts many parts of game play) because they are consistently the same shot and the only difference between playing at home vs. away is whether the crowd is cheering vs. booing. I interpret the result of my model as an indicator that pressure from the home crowd directly on the players is not a major factor in home court advantage -- although again, it could impact other parts of game play in different ways.
+
+
+
+
+
+
+
 
 
 
