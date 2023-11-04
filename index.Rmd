@@ -50,9 +50,24 @@ ft_barplot
 
 Milestone 4:
 
+2014-2022
+0.5870324
+
 ```{r, echo=FALSE}
-load("ft_table_formatted.RData")
-load("pts_table_formatted.RData")
+ft_table <- data.frame(
+  Intercept = c("75.88%"),
+  Home = c("+0.16%")
+)
+
+ft_table_formatted <- knitr::kable(ft_table, col.names = c("Average visiting team FT rate", "Average home court FT rate advantage"))
+
+pts_table <- data.frame(
+  Intercept = c("100.64"),
+  Home = c("+2.82")
+)
+
+pts_table_formatted <- knitr::kable(pts_table, col.names = c("Average visiting team points", "Average home court points advantage"))
+
 ```
 
 

@@ -90,15 +90,6 @@ ft_long <- games |>
 ft_fit <- lm(FT_PCT ~ Home, data = ft_long)
 glance(ft_fit)
 
-ft_table <- data.frame(
-  Intercept = c("75.88%"),
-  Home = c("+0.16%")
-)
-
-ft_table_formatted <- knitr::kable(ft_table, col.names = c("Average visiting team FT rate", "Average home court FT rate advantage"))
-
-save(ft_table_formatted, file = "ft_table_formatted.RData")
-
 #pts regression
 
 pts_long <- games |>
@@ -114,13 +105,8 @@ pts_long <- games |>
 pts_fit <- lm(PTS ~ Home, data = pts_long)
 glance(pts_fit)
 
-pts_table <- data.frame(
-  Intercept = c("100.64"),
-  Home = c("+2.82")
-)
 
-pts_table_formatted <- knitr::kable(pts_table, col.names = c("Average visiting team points", "Average home court points advantage"))
+#
 
-save(pts_table_formatted, file = "pts_table_formatted.RData")
-
+home_team_win_average <- mean(games$HOME_TEAM_WINS, na.rm = TRUE)
 ```
