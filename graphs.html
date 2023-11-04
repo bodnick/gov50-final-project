@@ -474,6 +474,7 @@ ft_table_formatted &lt;- knitr::kable(ft_table, col.names = c(&quot;Average visi
 
 save(ft_table_formatted, file = &quot;ft_table_formatted.RData&quot;)
 
+
 #pts regression
 
 pts_long &lt;- games |&gt;
@@ -500,7 +501,12 @@ glance(pts_fit)</code></pre>
 
 pts_table_formatted &lt;- knitr::kable(pts_table, col.names = c(&quot;Average visiting team points&quot;, &quot;Average home court points advantage&quot;))
 
-save(pts_table_formatted, file = &quot;pts_table_formatted.RData&quot;)</code></pre>
+save(pts_table_formatted, file = &quot;pts_table_formatted.RData&quot;)
+
+
+#
+
+home_team_win_average &lt;- mean(games$HOME_TEAM_WINS, na.rm = TRUE)</code></pre>
 
 
 
