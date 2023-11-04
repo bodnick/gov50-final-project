@@ -49,3 +49,12 @@ ft_barplot
 ```
 
 
+```{r}
+load("ft_table_formatted.RData")
+load("pts_table_formatted.RData")
+```
+
+
+
+
+

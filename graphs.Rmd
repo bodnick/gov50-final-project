@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
+library(broom)
 
 games <- read_csv("games.csv")
 fouls <- read_csv("games_details.csv")
@@ -38,7 +39,7 @@ wins_barplot <- ggplot(long_wins_table, aes(x = SEASON, y = percentage, fill = w
   scale_fill_manual(values = c("percentage_home_team_wins" = "#3498db", 
                                "percentage_away_team_wins" = "#e74c3c"),
                     labels = c("Home team", "Visiting team"),
-                    name = "Win rate type")
+                    name = "Win rate type") +
   theme_minimal()
   
 save(wins_barplot, file = "wins_barplot.RData")
@@ -73,5 +74,53 @@ ft_barplot <- ggplot(ft_table, aes(x = SEASON, y = avg_ft_difference)) +
   theme_minimal()
 
 save(ft_barplot, file = "ft_barplot.RData")
+
+#ft regression
+
+ft_long <- games |>
+  select(FT_PCT_home, FT_PCT_away) |>
+  na.omit() |>
+  pivot_longer(
+    cols = everything(),
+    names_to = "Home",
+    values_to = "FT_PCT"
+  ) |>
+  mutate(Home = as.integer(Home == "FT_PCT_home"))
+
+ft_fit <- lm(FT_PCT ~ Home, data = ft_long)
+glance(ft_fit)
+
+ft_table <- data.frame(
+  Intercept = c("75.88%"),
+  Home = c("+0.16%")
+)
+
+ft_table_formatted <- knitr::kable(ft_table, col.names = c("Average visiting team FT rate", "Average home court FT rate advantage"))
+
+save(ft_table_formatted, file = "ft_table_formatted.RData")
+
+#pts regression
+
+pts_long <- games |>
+  select(PTS_home, PTS_away) |>
+  na.omit() |>
+  pivot_longer(
+    cols = everything(),
+    names_to = "Home",
+    values_to = "PTS"
+  ) |>
+  mutate(Home = as.integer(Home == "PTS_home"))
+
+pts_fit <- lm(PTS ~ Home, data = pts_long)
+glance(pts_fit)
+
+pts_table <- data.frame(
+  Intercept = c("100.64"),
+  Home = c("+2.82")
+)
+
+pts_table_formatted <- knitr::kable(pts_table, col.names = c("Average visiting team points", "Average home court points advantage"))
+
+save(pts_table_formatted, file = "pts_table_formatted.RData")
 
 ```
