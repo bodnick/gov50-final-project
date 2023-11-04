@@ -48,8 +48,9 @@ load("ft_barplot.RData")
 ft_barplot
 ```
 
+Milestone 4:
 
-```{r}
+```{r, echo=FALSE}
 load("ft_table_formatted.RData")
 load("pts_table_formatted.RData")
 ```
