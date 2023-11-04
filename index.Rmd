@@ -50,23 +50,14 @@ ft_barplot
 
 Milestone 4:
 
-2014-2022
-0.5870324
+From 2014-2022 in the NBA, home teams won 58.70% of the time. I ran a univariate regression with whether a team was playing at home (1 if they were the home team, 0 if they were the visting team) as my independent variable and their score as the dependent variable. Here
 
 ```{r, echo=FALSE}
-ft_table <- data.frame(
-  Intercept = c("75.88%"),
-  Home = c("+0.16%")
-)
+load("ft_table_formatted.RData")
+ft_table_formatted
+load("pts_table_formatted.RData")
+pts_table_formatted
 
-ft_table_formatted <- knitr::kable(ft_table, col.names = c("Average visiting team FT rate", "Average home court FT rate advantage"))
-
-pts_table <- data.frame(
-  Intercept = c("100.64"),
-  Home = c("+2.82")
-)
-
-pts_table_formatted <- knitr::kable(pts_table, col.names = c("Average visiting team points", "Average home court points advantage"))
 
 ```
 
