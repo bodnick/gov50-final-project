@@ -409,7 +409,7 @@ wins_barplot &lt;- ggplot(long_wins_table, aes(x = SEASON, y = percentage, fill 
        x = &quot;NBA season&quot;) +
   scale_fill_manual(values = c(&quot;percentage_home_team_wins&quot; = &quot;#3498db&quot;, 
                                &quot;percentage_away_team_wins&quot; = &quot;#e74c3c&quot;),
-                    labels = c(&quot;Home team&quot;, &quot;Visiting team&quot;),
+                    labels = c(&quot;Visiting team&quot;, &quot;Home team&quot;),
                     name = &quot;Win rate type&quot;) +
   theme_minimal()
   

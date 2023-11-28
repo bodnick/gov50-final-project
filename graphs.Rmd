@@ -38,7 +38,7 @@ wins_barplot <- ggplot(long_wins_table, aes(x = SEASON, y = percentage, fill = w
        x = "NBA season") +
   scale_fill_manual(values = c("percentage_home_team_wins" = "#3498db", 
                                "percentage_away_team_wins" = "#e74c3c"),
-                    labels = c("Home team", "Visiting team"),
+                    labels = c("Visiting team", "Home team"),
                     name = "Win rate type") +
   theme_minimal()
   
