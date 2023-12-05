@@ -15,90 +15,24 @@ library(dplyr)
 library(ggplot2)
 library(broom)
 
-games <- read_csv("games.csv")
-fouls <- read_csv("games_details.csv")
+games_raw <- read_csv("games.csv")
 
-wins_table <- games |>
-  group_by(SEASON) |>
-  summarize(percentage_home_team_wins = mean(HOME_TEAM_WINS),
-            percentage_away_team_wins = 1 - mean(HOME_TEAM_WINS)
-  )
+games <- games_raw |>
+  filter(SEASON %in% c(2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,
+                       2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018))
 
-long_wins_table <- wins_table |>
-  pivot_longer(
-    cols = c(percentage_home_team_wins, percentage_away_team_wins),
-    names_to = "win_type",
-    values_to = "percentage"
-  )
+# wins long
 
-wins_barplot <- ggplot(long_wins_table, aes(x = SEASON, y = percentage, fill = win_type)) +
-  geom_bar(stat="identity", position="stack") +
-  labs(title = "Home teams consistently win more than half of games",
-       y = "Percentage of wins",
-       x = "NBA season") +
-  scale_fill_manual(values = c("percentage_home_team_wins" = "#3498db", 
-                               "percentage_away_team_wins" = "#e74c3c"),
-                    labels = c("Visiting team", "Home team"),
-                    name = "Win rate type") +
-  theme_minimal()
-  
-save(wins_barplot, file = "wins_barplot.RData")
-  
-points_table <- games |>
-  group_by(SEASON) |>
-  summarize(avg_score_difference = mean(PTS_home, na.rm = TRUE) - 
-              mean(PTS_away, na.rm = TRUE)
-  )
-
-points_barplot <- ggplot(points_table, aes(x = SEASON, y = avg_score_difference)) +
-  geom_bar(stat="identity", fill="#3498db") +
-  labs(title = "Home teams consistently scores more points than visiting teams",
-       y = "Average points advantage for the home team",
-       x = "NBA season") +
-  theme_minimal()
-
-save(points_barplot, file = "points_barplot.RData")
-
-ft_table <- games |>
-  group_by(SEASON) |>
-  summarize(avg_ft_difference = (mean(FT_PCT_home, na.rm = TRUE)) - 
-              (mean(FT_PCT_away, na.rm = TRUE))
-  )
-
-ft_barplot <- ggplot(ft_table, aes(x = SEASON, y = avg_ft_difference)) +
-  geom_bar(stat="identity", fill="#e74c3c") + 
-  geom_hline(yintercept = 0, linetype="dashed", color="black") +  # Adds a horizontal line at 0 for reference
-  labs(title = "Home teams often make slightly more free throws than visiting teams",
-       y = "Average FT% difference",
-       x = "NBA season") +
-  theme_minimal()
-
-save(ft_barplot, file = "ft_barplot.RData")
-
-#ft regression
-
-ft_long <- games |>
-  select(FT_PCT_home, FT_PCT_away) |>
-  na.omit() |>
-  pivot_longer(
-    cols = everything(),
-    names_to = "Home",
-    values_to = "FT_PCT"
+wins_long <- games |>
+  slice(rep(1:n(), each = 2)) |>
+  mutate(
+    Home = rep(c(0, 1), times = n()/2),
+    Win = ifelse((Home == 1 & HOME_TEAM_WINS == 1) | (Home == 0 & HOME_TEAM_WINS == 0), 1, 0)
   ) |>
-  mutate(Home = as.integer(Home == "FT_PCT_home"))
+  select(Home, Win)
 
-ft_fit <- lm(FT_PCT ~ Home, data = ft_long)
-glance(ft_fit)
-
-ft_table <- data.frame(
-  Intercept = c("75.88%"),
-  Home = c("+0.16%")
-)
-
-ft_table_formatted <- knitr::kable(ft_table, col.names = c("Average visiting team FT rate", "Average home court FT rate advantage"))
-
-save(ft_table_formatted, file = "ft_table_formatted.RData")
-
+wins_fit <- lm(Win ~ Home, data = wins_long)
+glance(wins_fit)
 
 #pts regression
 
@@ -116,16 +50,30 @@ pts_fit <- lm(PTS ~ Home, data = pts_long)
 glance(pts_fit)
 
 pts_table <- data.frame(
-  Intercept = c("100.64"),
-  Home = c("+2.82")
+  Intercept = c("98.693"),
+  Home = c("+3.014"),
+  P_value = c("1.11e-135")
 )
 
-pts_table_formatted <- knitr::kable(pts_table, col.names = c("Average visiting team points", "Average home court points advantage"))
+pts_table_formatted <- knitr::kable(pts_table, col.names = c("Average visiting team points", "Average home court points advantage", "P-value"))
 
 save(pts_table_formatted, file = "pts_table_formatted.RData")
 
+#box plot
 
-#
+pts_boxplot <- ggplot(pts_long, 
+                        aes(x = factor(Home, labels = c("Visiting team", "Home team")), y = PTS)) +
+  geom_boxplot(width = 0.5, position = position_dodge(width = 0.8)) +
+  stat_summary(fun = "mean", geom = "text", aes(label = sprintf("%.3f", after_stat(y))),
+               position = position_dodge(width = 0.8), vjust = -0.5, size = 3) +
+  labs(x = "", y = "Points scored") + 
+  ggtitle("Home court points advantage in the NBA, 2004-2019") +
+  coord_cartesian(ylim = c(0, max(pts_long$PTS) * 1.2)) 
+
+save(pts_boxplot, file = "pts_boxplot.RData")
+
+# home team win average
 
 home_team_win_average <- mean(games$HOME_TEAM_WINS, na.rm = TRUE)
+
 ```

@@ -1,0 +1,51 @@
+### OLD 
+
+```{r}
+
+
+
+wins_table <- games |>
+  group_by(SEASON) |>
+  summarize(percentage_home_team_wins = mean(HOME_TEAM_WINS),
+            percentage_away_team_wins = 1 - mean(HOME_TEAM_WINS)
+  )
+
+long_wins_table <- wins_table |>
+  pivot_longer(
+    cols = c(percentage_home_team_wins, percentage_away_team_wins),
+    names_to = "win_type",
+    values_to = "percentage"
+  )
+
+wins_barplot <- ggplot(long_wins_table, aes(x = SEASON, y = percentage, fill = win_type)) +
+  geom_bar(stat="identity", position="stack") +
+  labs(title = "Home teams consistently win more than half of games",
+       y = "Percentage of wins",
+       x = "NBA season") +
+  scale_fill_manual(values = c("percentage_home_team_wins" = "#3498db", 
+                               "percentage_away_team_wins" = "#e74c3c"),
+                    labels = c("Visiting team", "Home team"),
+                    name = "Win rate type") +
+  theme_minimal()
+  
+save(wins_barplot, file = "wins_barplot.RData")
+  
+points_table <- games |>
+  group_by(SEASON) |>
+  summarize(avg_score_difference = mean(PTS_home, na.rm = TRUE) - 
+              mean(PTS_away, na.rm = TRUE)
+  )
+
+points_barplot <- ggplot(points_table, aes(x = SEASON, y = avg_score_difference)) +
+  geom_bar(stat="identity", fill="#3498db") +
+  labs(title = "Home teams consistently scores more points than visiting teams",
+       y = "Average points advantage for the home team",
+       x = "NBA season") +
+  theme_minimal()
+
+save(points_barplot, file = "points_barplot.RData")
+
+###
+
+home_team_win_average <- mean(games$HOME_TEAM_WINS, na.rm = TRUE)
+```
