@@ -37,12 +37,25 @@ glance(wins_fit)
 wins_table <- data.frame(
   Intercept = c("40.57%"),
   Home = c("+18.86%"),
-  P_value = c("0.00")
+  P_value = c("0")
 )
 
 wins_table <- knitr::kable(wins_table, col.names = c("Visiting team win rate (intercept)", "Home team win rate advantage (coefficient)", "P-value"), digits = 2)
 
 save(wins_table, file = "wins_table.RData")
+
+# confounder -- years?
+
+wins_long_season <- games |>
+  slice(rep(1:n(), each = 2)) |>
+  mutate(
+    Season = SEASON,
+    Home = rep(c(0, 1), times = n()/2),
+    Win = ifelse((Home == 1 & HOME_TEAM_WINS == 1) | (Home == 0 & HOME_TEAM_WINS == 0), 1, 0)
+  ) |>
+  select(Home, Season, Win)
+
+wins_multiple_fit <- lm(Win ~ Home + Season, data = wins_long_season)
 
 # wins bar chart 
 
@@ -87,12 +100,26 @@ glance(pts_fit)
 pts_table <- data.frame(
   Intercept = c("98.69"),
   Home = c("+3.01"),
-  P_value = c("0.00")
+  P_value = c("1.11e-135")
 )
 
 pts_table <- knitr::kable(pts_table, col.names = c("Average visiting team points (intercept)", "Average home court points advantage (coefficient)", "P-value"))
 
 save(pts_table, file = "pts_table.RData")
+
+# pts season
+
+pts_long_season <- games |>
+  select(SEASON, PTS_home, PTS_away) |> 
+  na.omit() |>
+  pivot_longer(
+    cols = c(PTS_home, PTS_away), 
+    names_to = "Home",
+    values_to = "PTS"
+  ) |>
+  mutate(Home = as.integer(Home == "PTS_home"))
+
+pts_multiple_fit <- lm(PTS ~ Home + SEASON, data = pts_long_season)
 
 #box plot
 

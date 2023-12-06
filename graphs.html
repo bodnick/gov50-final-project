@@ -370,7 +370,7 @@ display: none;
 library(ggplot2)
 library(broom)
 
-games &lt;- read_csv(&quot;games.csv&quot;)</code></pre>
+games_raw &lt;- read_csv(&quot;games.csv&quot;)</code></pre>
 <pre><code>## Rows: 26651 Columns: 21
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -380,99 +380,73 @@ games &lt;- read_csv(&quot;games.csv&quot;)</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>fouls &lt;- read_csv(&quot;games_details.csv&quot;)</code></pre>
-<pre><code>## Rows: 668628 Columns: 29
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr  (7): TEAM_ABBREVIATION, TEAM_CITY, PLAYER_NAME, NICKNAME, START_POSITIO...
-## dbl (22): GAME_ID, TEAM_ID, PLAYER_ID, FGM, FGA, FG_PCT, FG3M, FG3A, FG3_PCT...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>wins_table &lt;- games |&gt;
-  group_by(SEASON) |&gt;
-  summarize(percentage_home_team_wins = mean(HOME_TEAM_WINS),
-            percentage_away_team_wins = 1 - mean(HOME_TEAM_WINS)
-  )
+<pre class="r"><code>games &lt;- games_raw |&gt;
+  filter(SEASON %in% c(2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,
+                       2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018))
 
-long_wins_table &lt;- wins_table |&gt;
-  pivot_longer(
-    cols = c(percentage_home_team_wins, percentage_away_team_wins),
-    names_to = &quot;win_type&quot;,
-    values_to = &quot;percentage&quot;
-  )
+# wins regression
 
-wins_barplot &lt;- ggplot(long_wins_table, aes(x = SEASON, y = percentage, fill = win_type)) +
-  geom_bar(stat=&quot;identity&quot;, position=&quot;stack&quot;) +
-  labs(title = &quot;Home teams consistently win more than half of games&quot;,
-       y = &quot;Percentage of wins&quot;,
-       x = &quot;NBA season&quot;) +
-  scale_fill_manual(values = c(&quot;percentage_home_team_wins&quot; = &quot;#3498db&quot;, 
-                               &quot;percentage_away_team_wins&quot; = &quot;#e74c3c&quot;),
-                    labels = c(&quot;Visiting team&quot;, &quot;Home team&quot;),
-                    name = &quot;Win rate type&quot;) +
-  theme_minimal()
-  
-save(wins_barplot, file = &quot;wins_barplot.RData&quot;)
-  
-points_table &lt;- games |&gt;
-  group_by(SEASON) |&gt;
-  summarize(avg_score_difference = mean(PTS_home, na.rm = TRUE) - 
-              mean(PTS_away, na.rm = TRUE)
-  )
-
-points_barplot &lt;- ggplot(points_table, aes(x = SEASON, y = avg_score_difference)) +
-  geom_bar(stat=&quot;identity&quot;, fill=&quot;#3498db&quot;) +
-  labs(title = &quot;Home teams consistently scores more points than visiting teams&quot;,
-       y = &quot;Average points advantage for the home team&quot;,
-       x = &quot;NBA season&quot;) +
-  theme_minimal()
-
-save(points_barplot, file = &quot;points_barplot.RData&quot;)
-
-ft_table &lt;- games |&gt;
-  group_by(SEASON) |&gt;
-  summarize(avg_ft_difference = (mean(FT_PCT_home, na.rm = TRUE)) - 
-              (mean(FT_PCT_away, na.rm = TRUE))
-  )
-
-ft_barplot &lt;- ggplot(ft_table, aes(x = SEASON, y = avg_ft_difference)) +
-  geom_bar(stat=&quot;identity&quot;, fill=&quot;#e74c3c&quot;) + 
-  geom_hline(yintercept = 0, linetype=&quot;dashed&quot;, color=&quot;black&quot;) +  # Adds a horizontal line at 0 for reference
-  labs(title = &quot;Home teams often make slightly more free throws than visiting teams&quot;,
-       y = &quot;Average FT% difference&quot;,
-       x = &quot;NBA season&quot;) +
-  theme_minimal()
-
-save(ft_barplot, file = &quot;ft_barplot.RData&quot;)
-
-#ft regression
-
-ft_long &lt;- games |&gt;
-  select(FT_PCT_home, FT_PCT_away) |&gt;
-  na.omit() |&gt;
-  pivot_longer(
-    cols = everything(),
-    names_to = &quot;Home&quot;,
-    values_to = &quot;FT_PCT&quot;
+wins_long &lt;- games |&gt;
+  slice(rep(1:n(), each = 2)) |&gt;
+  mutate(
+    Home = rep(c(0, 1), times = n()/2),
+    Win = ifelse((Home == 1 &amp; HOME_TEAM_WINS == 1) | (Home == 0 &amp; HOME_TEAM_WINS == 0), 1, 0)
   ) |&gt;
-  mutate(Home = as.integer(Home == &quot;FT_PCT_home&quot;))
+  select(Home, Win)
 
-ft_fit &lt;- lm(FT_PCT ~ Home, data = ft_long)
-glance(ft_fit)</code></pre>
+wins_fit &lt;- lm(Win ~ Home, data = wins_long)
+glance(wins_fit)</code></pre>
 <pre><code>## # A tibble: 1 × 12
-##   r.squared adj.r.squared sigma statistic p.value    df logLik     AIC     BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-## 1 0.0000585     0.0000397 0.102      3.11  0.0780     1 45842. -91678. -91652.
+##   r.squared adj.r.squared sigma statistic p.value    df  logLik    AIC    BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1    0.0356        0.0355 0.491     1639.       0     1 -31464. 62934. 62960.
 ## # ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
-<pre class="r"><code>ft_table &lt;- data.frame(
-  Intercept = c(&quot;75.88%&quot;),
-  Home = c(&quot;+0.16%&quot;)
+<pre class="r"><code>wins_table &lt;- data.frame(
+  Intercept = c(&quot;40.57%&quot;),
+  Home = c(&quot;+18.86%&quot;),
+  P_value = c(&quot;0&quot;)
 )
 
-ft_table_formatted &lt;- knitr::kable(ft_table, col.names = c(&quot;Average visiting team FT rate&quot;, &quot;Average home court FT rate advantage&quot;))
+wins_table &lt;- knitr::kable(wins_table, col.names = c(&quot;Visiting team win rate (intercept)&quot;, &quot;Home team win rate advantage (coefficient)&quot;, &quot;P-value&quot;), digits = 2)
 
-save(ft_table_formatted, file = &quot;ft_table_formatted.RData&quot;)
+save(wins_table, file = &quot;wins_table.RData&quot;)
+
+# confounder -- years?
+
+wins_long_season &lt;- games |&gt;
+  slice(rep(1:n(), each = 2)) |&gt;
+  mutate(
+    Season = SEASON,
+    Home = rep(c(0, 1), times = n()/2),
+    Win = ifelse((Home == 1 &amp; HOME_TEAM_WINS == 1) | (Home == 0 &amp; HOME_TEAM_WINS == 0), 1, 0)
+  ) |&gt;
+  select(Home, Season, Win)
+
+wins_multiple_fit &lt;- lm(Win ~ Home + Season, data = wins_long_season)
+
+# wins bar chart 
+
+wins_table_1 &lt;- data.frame(
+  Team = c(&quot;Visiting Team&quot;, &quot;Home Team&quot;),
+  WinRate = c(0.40571, 0.59428)
+)
+
+wins_barchart &lt;- ggplot(wins_table_1, aes(x = &quot;&quot;, y = WinRate, fill = Team)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  labs(title = &quot;Win rates in the NBA, 2004-2019&quot;,
+       y = &quot;Win rate&quot;) +
+  scale_fill_manual(values = c(&quot;Home Team&quot; = &quot;#3498db&quot;, &quot;Visiting Team&quot; = &quot;#e74c3c&quot;)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  theme_minimal() +
+  theme(axis.title.x = element_blank(), axis.title.y = element_blank(), 
+        axis.text.x = element_blank(), axis.ticks.x = element_blank(), 
+        legend.position = &quot;none&quot;) + 
+  annotate(&quot;text&quot;, x = 1, y = max(wins_table_1$WinRate) * 1.15, 
+           label = &quot;Home team win rate = 59.43%&quot;, color = &quot;#000000&quot;) +
+  annotate(&quot;text&quot;, x = 1, y = max(wins_table_1$WinRate) * 0.3,
+           label = &quot;Visiting team win rate = 40.57%&quot;, color = &quot;#000000&quot;)
+
+save(wins_barchart, file = &quot;wins_barchart.RData&quot;)
 
 
 #pts regression
@@ -492,21 +466,48 @@ glance(pts_fit)</code></pre>
 <pre><code>## # A tibble: 1 × 12
 ##   r.squared adj.r.squared sigma statistic   p.value    df   logLik    AIC    BIC
 ##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1    0.0110        0.0110  13.4      590. 1.39e-129     1 -213009. 4.26e5 4.26e5
+## 1    0.0138        0.0138  12.7      619. 1.11e-135     1 -175455. 3.51e5 3.51e5
 ## # ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
 <pre class="r"><code>pts_table &lt;- data.frame(
-  Intercept = c(&quot;100.64&quot;),
-  Home = c(&quot;+2.82&quot;)
+  Intercept = c(&quot;98.69&quot;),
+  Home = c(&quot;+3.01&quot;),
+  P_value = c(&quot;1.11e-135&quot;)
 )
 
-pts_table_formatted &lt;- knitr::kable(pts_table, col.names = c(&quot;Average visiting team points&quot;, &quot;Average home court points advantage&quot;))
+pts_table &lt;- knitr::kable(pts_table, col.names = c(&quot;Average visiting team points (intercept)&quot;, &quot;Average home court points advantage (coefficient)&quot;, &quot;P-value&quot;))
 
-save(pts_table_formatted, file = &quot;pts_table_formatted.RData&quot;)
+save(pts_table, file = &quot;pts_table.RData&quot;)
 
+# pts season
 
-#
+pts_long_season &lt;- games |&gt;
+  select(SEASON, PTS_home, PTS_away) |&gt; 
+  na.omit() |&gt;
+  pivot_longer(
+    cols = c(PTS_home, PTS_away), 
+    names_to = &quot;Home&quot;,
+    values_to = &quot;PTS&quot;
+  ) |&gt;
+  mutate(Home = as.integer(Home == &quot;PTS_home&quot;))
 
-home_team_win_average &lt;- mean(games$HOME_TEAM_WINS, na.rm = TRUE)</code></pre>
+pts_multiple_fit &lt;- lm(PTS ~ Home + SEASON, data = pts_long_season)
+
+#box plot
+
+pts_boxplot &lt;- ggplot(pts_long, 
+                      aes(x = factor(Home, 
+                                     labels = c(&quot;Visiting team&quot;, &quot;Home team&quot;)), 
+                          y = PTS, fill = factor(Home))) +
+  geom_boxplot(width = 0.5, position = position_dodge(width = 0.8)) +
+  scale_fill_manual(values = c(&quot;Visiting team&quot; = &quot;#e74c3c&quot;, &quot;Home team&quot; = &quot;#3498db&quot;)) +
+  stat_summary(fun = &quot;mean&quot;, geom = &quot;text&quot;, aes(label = sprintf(&quot;%.2f&quot;, after_stat(y))),
+               position = position_dodge(width = 0.8), vjust = -0.5, size = 3) +
+  labs(x = &quot;&quot;, y = &quot;Points scored&quot;) + 
+  ggtitle(&quot;Home court points advantage in the NBA, 2004-2019&quot;) +
+  coord_cartesian(ylim = c(0, max(pts_long$PTS) * 1.2)) +
+  theme_minimal()
+
+save(pts_boxplot, file = &quot;pts_boxplot.RData&quot;)</code></pre>
 
 
 
