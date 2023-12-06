@@ -47,5 +47,4 @@ save(points_barplot, file = "points_barplot.RData")
 
 ###
 
-home_team_win_average <- mean(games$HOME_TEAM_WINS, na.rm = TRUE)
-```
+33```
