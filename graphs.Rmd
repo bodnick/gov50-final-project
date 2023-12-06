@@ -157,11 +157,6 @@ pts_playoffs_fit <- lm(PTS ~ Home + playoffs, data = pts_long)
 # section 1 graphs
 
 ggplot(games, aes(x = factor(HOME_TEAM_WINS))) +
-  geom_bar(stat = "count") +
-  labs(x = "HOME_TEAM_WINS", y = "Count") +
-  scale_x_discrete(labels = c("Loss (0)", "Win (1)"))
-
-ggplot(games, aes(x = factor(HOME_TEAM_WINS))) +
   geom_bar(aes(fill = factor(HOME_TEAM_WINS)), stat = "count") +
   labs(y = "Count") +
   scale_x_discrete(labels = c("Visiting Team Won", "Home Team Won")) +
@@ -170,4 +165,13 @@ ggplot(games, aes(x = factor(HOME_TEAM_WINS))) +
   theme(axis.title.x = element_blank(), legend.position = "none") + 
   scale_fill_manual(values = c("0" = "#e74c3c", "1" = "#3498db"))
 
+
+ggplot(na.omit(games[c("PTS_away", "PTS_home")]), aes(x = PTS_away)) +
+  geom_density(aes(fill = "PTS_away"), alpha = 0.5) + 
+  geom_density(aes(x = PTS_home, fill = "PTS_home"), alpha = 0.5) +  
+  labs(x = "Points", y = "Density") +
+  scale_fill_manual(values = c("PTS_away" = "#e74c3c", "PTS_home" = "#3498db"), 
+                    labels = c("Points scored by visiting teams", "Points scored by home teams")) +
+  theme_minimal() +
+  guides(fill = guide_legend(title = NULL))
 ```
