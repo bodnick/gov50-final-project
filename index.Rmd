@@ -89,7 +89,7 @@ Other than season and playoff, which I ruled out, I could not come up with any o
 
 # Note
 
-I coded my regressions, tables, and graphs in the file "code.Rmd" and loaded them into this website. You can find my code in my Github repository.
+I coded my regressions, tables, and graphs in the file "realcoding.Rmd" and loaded them into this website. You can find my code in my Github repository.
 
 # Sources
 
