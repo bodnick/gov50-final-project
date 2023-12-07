@@ -87,6 +87,10 @@ I found support for my hypotheses that home teams in the NBA (from 2003-2019) wo
 
 Other than season and playoff, which I ruled out, I could not come up with any other potential confounding variables. However, I could be overlooking a key confounding variable, which is another potential limitation of my analysis and threat to inference. All of the other factors at play that I brainstormed were not truly confounders, but rather contributors to the home court advantage. For example, as I mentioned in the introduction, visiting teams may be more tired from travel or unforgiving scheduling. I believe that these types of factors that are directly tied to playing at home, even if impactful, would not disprove my argument that teams do better when they play at home. Instead, they represent causes of the advantage and areas for further research. Quantifying the home court advantage is the first step; the next step is asking why it exists (and potentially how it can be minimized). Researchers have made progressive on these questions, but they are still contested and merit further inquiry (Moskowitz & Wertheim, 2012, p. 116-167).
 
+# Note
+
+I coded my regressions, tables, and graphs in the file "code.Rmd" and loaded them into this website. You can find my code in my Github repository.
+
 # Sources
 
 Scorecasting by Tobias Moskowitz and Jon Wertheim, 2012
