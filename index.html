@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["coding.nb.html","games_details.csv","games.csv","graphs.html","images/wins-plot-1.png","images/wins-plot-2.png","images/wins-plot-3.png","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-1-3.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-2-2.png","index_files/figure-html5/unnamed-chunk-2-3.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-3-2.png","index_files/figure-html5/unnamed-chunk-3-3.png","index_files/figure-html5/wins-plot\"-1.png","index_files/figure-html5/wins-plot\"-2.png","index_files/figure-html5/wins-plot\"-3.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","players.csv","teams.csv"]}
+  {"type":"character","attributes":{},"value":["code.html","coding.nb.html","games_details.csv","games.csv","graphs.html","images/wins-plot-1.png","images/wins-plot-2.png","images/wins-plot-3.png","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-1-3.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-2-2.png","index_files/figure-html5/unnamed-chunk-2-3.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-3-2.png","index_files/figure-html5/unnamed-chunk-3-3.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/wins-plot\"-1.png","index_files/figure-html5/wins-plot\"-2.png","index_files/figure-html5/wins-plot\"-3.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","players.csv","teams.csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1526,48 +1526,78 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
 </div>
-<p>“”</p>
+<p>My outcome variable, points, is coded as two scalar variables: PTS_away (points scored by the visiting team) and PTS_home (points scored by the home team). Here is a plot that summarizes PTS_away and PTS_home and shows that NBA home teams scored slightly more points than visiting teams from 2003-2019:</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
+</div>
+<p>My explanatory variable — whether a team played at home — is not explicitly set in the original data, as it is formatted as one observation for each game with statistics about both teams. However, the statistics (HOME_TEAM_WINS, PTS_away, and PTS_home) are specified to the home and visiting team. Therefore, I used the pivot_longer function to make each observation into two observations, one for each team (with both the explanatory and outcome variables). For wins, I used pivot_longer to create a table with a variable called Win (which equalled 1 if a team won the game, and 0 if they lost, based on the HOME_TEAM_WINS statistic) and another called Home (which equalled 1 if the relevant team was a home team, and 0 if they were a visiting team, also extrapolated from the HOME_TEAM_WINS statistic). For points, I used pivot_longer to create a table with a variable called PTS (which equalled the number of points a team scored in a game, based on PTS_away and PTS_home) and another called Home (which equalled 1 if the relevant team was a home team, and 0 if they were a visiting team, also extrapolated from PTS_away and PTS_home). My research design is cross-sectional — it compares outcomes treated and control units at one point in time; i.e., it compares points scored and games by home vs. visiting teams.</p>
+<p>Later in this project, in the Results section, I discuss two more variables (Season and Playoffs) as potential confounders. I also added these variables to each of my long tables. I directly pulled Season from the SEASON variable (formatted in YYYY) in the original data. For Playoffs, in the original data, I used the mutate function to create a new variable called MMDD that converted GAME_DATE_EST (what day the game took place, in YYYY-MM-DD format) to an integer with just the month and date (i.e., 2006-05-03 would become 503). Then, based on the Season and MMDD variables, and the historical Playoffs schedules, I created a new variable which equaled 1 if the game was a playoff game and 0 if it was not. I incorporated this variable into my long tables.</p>
 <h1 id="results">Results</h1>
 <h3 id="regression-1-wins">Regression #1: Wins</h3>
+<p>My first regression was univariate and related the explanatory variable of whether a team was playing at home to the outcome variable of whether a team won. Importantly, my explanatory variable was binary: it equaled 1 if the team was playing at home, and 0 if they were visiting. Therefore, the outcome variables were grouped into two potential categories and the regression separated the two outcome means. For this first regression, the outcome variable was also binary: 1 if the team won, and 0 if it lost. As a result of the binary explanatory variable, the intercept of the regression was the average visiting team win rate and the coefficient was the difference in means between the average visiting and home team win rates. Here are the regression results in table form, and the visualized averages:</p>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 50%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Visiting team win rate (intercept)</th>
+<th style="text-align: left;">Home team win rate advantage (coefficient)</th>
+<th style="text-align: left;">P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">40.57%</td>
+<td style="text-align: left;">+18.86%</td>
+<td style="text-align: left;">0</td>
+</tr>
+</tbody>
+</table>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<p>According to the model, NBA home teams won 18.86% more than visiting teams from 2003-2019. Visiting teams won 40.57% of the time and home teams won 59.43% of the time. These results are significant at p &lt; 0.05 and p &lt; 0.01. The p-value was so small that R rounded it to zero. This means that if the null hypothesis is true, you would still expect to see the relationship observed nearly 0% of the time purely due to random chance. In other words, the relationship between whether a team plays at home or away and whether they win is very strong.</p>
 <h3 id="regression-2-points">Regression #2: Points</h3>
+<p>My second regression was also univariate and related the explanatory variable of whether a team was playing at home to the outcome variable of how many points a team scored. Unlike in my first regression, my explanatory variable was scalar, but because the explanatory variable was still binary, as in the first regression, the outcome variables were grouped into two potential categories and the regression separated the two outcome means. Therefore, as a result of the binary explanatory variable, the intercept of the regression was the average number of points scored by the visiting team and the coefficient was the difference in means between the average number of points scored by the visiting and home teams. Here are the regression results in table form, and the visualized averages:</p>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 49%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Average visiting team points (intercept)</th>
+<th style="text-align: left;">Average home court points advantage (coefficient)</th>
+<th style="text-align: left;">P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">98.69</td>
+<td style="text-align: left;">+3.01</td>
+<td style="text-align: left;">1.11e-135</td>
+</tr>
+</tbody>
+</table>
+<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+</div>
+<p>According to the model, NBA home teams scored an average of 3.01 more points than visiting teams from 2003-2019. Visiting teams scored an average of 98.69 points and home teams scored an average of 101.71 points. These results are significant at p &lt; 0.05 and p &lt; 0.01. The p-value is extremely small: 1.11e-135. This means that if the null hypothesis is true, you would still expect to see the relationship observed nearly 0% of the time purely due to random chance. Therefore, the relationship between whether a team plays at home or away and how much they scored is very strong.</p>
 <h3 id="potential-confounders">Potential confounders</h3>
+<p>The regressions show a highly statistically significant, positive relationship between NBA teams playing at home and winning more/scoring more points (from 2003-2019). When determining causality, it is crucial to evaluate the study design and identify potential confounders. Cross-sectional designs assume that groups are identical on average. In the NBA regular season, every team plays 41 games at home and 41 games away, so each team appears in the treated and control groups at the same frequently. Therefore, many potential confounders such as team strength are ruled out.</p>
+<p>However, this data set also includes playoff games — which are more complicated. In the playoffs, teams play best of seven. The higher-seeded (and likely stronger) team hosts the first, second, fifth, and seventh game, and the lower-seeded (and likely weaker) team hosts the third, fourth, and sixth game. As a result, the stronger team often plays more games at home. Both teams play the same number of games at home and away if the series goes to four or six games; but if it goes to five or seven games, the higher-seeded teams play more at home. Therefore, higher-seeded/stronger teams disproportionately play at home during the playoffs and lower-seeded/relatively weaker teams disproportionately play away during the playoffs, which could present a possible confounder. Furthermore, regardless of how many games are played at home, the higher-seeded teams play their games earlier in the series — when they could possibly be less tired or less likely to have injured players. This could further bolster the advantage of home teams (on average) during the playoffs.</p>
+<p>To evaluate this concern, I ran a bivariate regression and considered the variable Playoffs (described in the Data section) along with whether or not a team was playing at home as my explanatory variables. For both wins and points, this confounder had no effect on the “home vs. away” coefficient; playing at home made teams win and score more points at the exact same rates as in the univariate regression, even considering whether a game was a playoff or regular season game.</p>
+<p>Another potential confounder I looked at was when the game was played. The league has made several changes to game play in recent years — such as introducing the Coach’s Challenge in 2019 — that could’ve affected home court bias over time. I ran a bivariate regression that considered the Season along with whether or not a team was playing at home as my explanatory variables. For both wins and points, this confounder had no effect on the “home vs. away” coefficient; playing at home made teams win and score more points at the exact same rates as in the univariate regression, even considering the season a game was played. After ruling out these potential confounders — although there may be more that I am missing — I believe that the coefficients that I found represent a causal effect.</p>
 <h1 id="conclusion">Conclusion</h1>
+<p>I found support for my hypotheses that home teams in the NBA (from 2003-2019) won more games and scored more points than visiting teams.According to my analysis, from 2003-2019 in the NBA, teams won about 19% more and scored about 3 more points on average when they played at home. One limit to my analysis was its limited time scope between 2003 and 2019. In the future, I would like to follow up this project with more historical analyses, post-COVID analysis (especially in a few years when there is more data), and analysis of the NBA Bubble during the pandemic. Looking at pandemic games would present analytical challenges (which is why I avoided it in this project), but also the opportunity to analyze games held under a wider variety of conditions than normal (i.e., with and without crowds).</p>
+<p>Other than season and playoff, which I ruled out, I could not come up with any other potential confounding variables. However, I could be overlooking a key confounding variable, which is another potential limitation of my analysis and threat to inference. All of the other factors at play that I brainstormed were not truly confounders, but rather contributors to the home court advantage. For example, as I mentioned in the introduction, visiting teams may be more tired from travel or unforgiving scheduling. I believe that these types of factors that are directly tied to playing at home, even if impactful, would not disprove my argument that teams do better when they play at home. Instead, they represent causes of the advantage and areas for further research. Quantifying the home court advantage is the first step; the next step is asking why it exists (and potentially how it can be minimized). Researchers have made progressive on these questions, but they are still contested and merit further inquiry (Moskowitz &amp; Wertheim, 2012, p. 116-167).</p>
 <h1 id="sources">Sources</h1>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-2-2.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-2-3.png" width="624" /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Average visiting team points</th>
-<th style="text-align: left;">Average home court points advantage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">100.64</td>
-<td style="text-align: left;">+2.82</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Average visiting team FT rate</th>
-<th style="text-align: left;">Average home court FT rate advantage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">75.88%</td>
-<td style="text-align: left;">+0.16%</td>
-</tr>
-</tbody>
-</table>
-</div>
+<p>Scorecasting by Tobias Moskowitz and Jon Wertheim, 2012</p>
+<p>“NBA games data,” Nathan Lauga, Kaggle: <a href="https://www.kaggle.com/datasets/nathanlauga/nba-games" class="uri">https://www.kaggle.com/datasets/nathanlauga/nba-games</a></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

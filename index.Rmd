@@ -40,6 +40,7 @@ pts_linechart
 ```
 
 My explanatory variable — whether a team played at home — is not explicitly set in the original data, as it is formatted as one observation for each game with statistics about both teams. However, the statistics (HOME_TEAM_WINS, PTS_away, and PTS_home) are specified to the home and visiting team. Therefore, I used the pivot_longer function to make each observation into two observations, one for each team (with both the explanatory and outcome variables). For wins, I used pivot_longer to create a table with a variable called Win (which equalled 1 if a team won the game, and 0 if they lost, based on the HOME_TEAM_WINS statistic) and another called Home (which equalled 1 if the relevant team was a home team, and 0 if they were a visiting team, also extrapolated from the HOME_TEAM_WINS statistic). For points, I used pivot_longer to create a table with a variable called PTS (which equalled the number of points a team scored in a game, based on PTS_away and PTS_home) and another called Home (which equalled 1 if the relevant team was a home team, and 0 if they were a visiting team, also extrapolated from PTS_away and PTS_home). My research design is cross-sectional — it compares outcomes treated and control units at one point in time; i.e., it compares points scored and games by home vs. visiting teams.
+
 Later in this project, in the Results section, I discuss two more variables (Season and Playoffs) as potential confounders. I also added these variables to each of my long tables. I directly pulled Season from the SEASON variable (formatted in YYYY) in the original data. For Playoffs, in the original data, I used the mutate function to create a new variable called MMDD that converted GAME_DATE_EST (what day the game took place, in YYYY-MM-DD format) to an integer with just the month and date (i.e., 2006-05-03 would become 503). Then, based on the Season and MMDD variables, and the historical Playoffs schedules, I created a new variable which equaled 1 if the game was a playoff game and 0 if it was not. I incorporated this variable into my long tables.
 
 # Results
@@ -49,7 +50,10 @@ Later in this project, in the Results section, I discuss two more variables (Sea
 My first regression was univariate and related the explanatory variable of whether a team was playing at home to the outcome variable of whether a team won. Importantly, my explanatory variable was binary: it equaled 1 if the team was playing at home, and 0 if they were visiting. Therefore, the outcome variables were grouped into two potential categories and the regression separated the two outcome means. For this first regression, the outcome variable was also binary: 1 if the team won, and 0 if it lost. As a result of the binary explanatory variable, the intercept of the regression was the average visiting team win rate and the coefficient was the difference in means between the average visiting and home team win rates. Here are the regression results in table form, and the visualized averages:
 
 ```{r, echo=FALSE}
-
+load("wins_regression_table.RData")
+wins_regression_table
+load("wins_regression_barchart.RData")
+wins_regression_barchart
 ```
 
 According to the model, NBA home teams won 18.86% more than visiting teams from 2003-2019. Visiting teams won 40.57% of the time and home teams won 59.43% of the time. These results are significant at p < 0.05 and p < 0.01. The p-value was so small that R rounded it to zero. This means that if the null hypothesis is true, you would still expect to see the relationship observed nearly 0% of the time purely due to random chance. In other words, the relationship between whether a team plays at home or away and whether they win is very strong.
@@ -59,7 +63,10 @@ According to the model, NBA home teams won 18.86% more than visiting teams from 
 My second regression was also univariate and related the explanatory variable of whether a team was playing at home to the outcome variable of how many points a team scored. Unlike in my first regression, my explanatory variable was scalar, but because the explanatory variable was still binary, as in the first regression, the outcome variables were grouped into two potential categories and the regression separated the two outcome means. Therefore, as a result of the binary explanatory variable, the intercept of the regression was the average number of points scored by the visiting team and the coefficient was the difference in means between the average number of points scored by the visiting and home teams. Here are the regression results in table form, and the visualized averages:
 
 ```{r, echo=FALSE}
-
+load("pts_regression_table.RData")
+pts_regression_table
+load("pts_regression_boxplot.RData")
+pts_regression_boxplot
 ```
 
 According to the model, NBA home teams scored an average of 3.01 more points than visiting teams from 2003-2019. Visiting teams scored an average of 98.69 points and home teams scored an average of 101.71 points. These results are significant at p < 0.05 and p < 0.01. The p-value is extremely small: 1.11e-135. This means that if the null hypothesis is true, you would still expect to see the relationship observed nearly 0% of the time purely due to random chance. Therefore, the relationship between whether a team plays at home or away and how much they scored is very strong.
