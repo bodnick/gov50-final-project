@@ -1,0 +1,210 @@
+---
+title: "Graphs"
+output: html_document
+date: "2023-10-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Loading packages, limiting my data to 2003-2019, creating playoffs variable for confounding section
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(broom)
+library(lubridate)
+
+games_raw <- read_csv("games.csv", show_col_types = FALSE)
+
+games <- games_raw |>
+  filter(SEASON %in% c(2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,
+                       2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018))
+
+#creating new playoffs variable
+
+games <- games |>
+  mutate(MMDD = as.numeric(format(ymd(GAME_DATE_EST), "%m%d")))
+
+games <- games |>
+  mutate(playoffs = case_when(
+    SEASON == 2003 & MMDD >= 417 & MMDD <= 615 ~ 1,
+    SEASON == 2004 & MMDD >= 423 & MMDD <= 623 ~ 1,
+    SEASON == 2005 & MMDD >= 422 & MMDD <= 620 ~ 1,
+    SEASON == 2006 & MMDD >= 421 & MMDD <= 614 ~ 1,
+    SEASON == 2007 & MMDD >= 419 & MMDD <= 617 ~ 1,
+    SEASON == 2008 & MMDD >= 418 & MMDD <= 614 ~ 1,
+    SEASON == 2009 & MMDD >= 417 & MMDD <= 617 ~ 1,
+    SEASON == 2010 & MMDD >= 416 & MMDD <= 612 ~ 1,
+    SEASON == 2011 & MMDD >= 428 & MMDD <= 620 ~ 1,
+    SEASON == 2012 & MMDD >= 420 & MMDD <= 620 ~ 1,
+    SEASON == 2013 & MMDD >= 419 & MMDD <= 615 ~ 1,
+    SEASON == 2014 & MMDD >= 418 & MMDD <= 616 ~ 1,
+    SEASON == 2015 & MMDD >= 416 & MMDD <= 619 ~ 1,
+    SEASON == 2016 & MMDD >= 415 & MMDD <= 612 ~ 1,
+    SEASON == 2017 & MMDD >= 414 & MMDD <= 608 ~ 1,
+    SEASON == 2018 & MMDD >= 413 & MMDD <= 613 ~ 1,
+    TRUE ~ 0  
+  ))
+
+```
+
+Introduction graphs
+
+```{r}
+
+wins_barchart_1 <- ggplot(games, aes(x = factor(HOME_TEAM_WINS))) +
+  geom_bar(aes(fill = factor(HOME_TEAM_WINS)), stat = "count") +
+  labs(y = "Count") +
+  scale_x_discrete(labels = c("Visiting Team Won", "Home Team Won")) +
+  geom_text(stat = "count", aes(label = ..count..), vjust = -0.5) +
+  theme_minimal() +
+  theme(axis.title.x = element_blank(), legend.position = "none") + 
+  scale_fill_manual(values = c("0" = "#e74c3c", "1" = "#3498db"))
+
+save(wins_barchart_1, file = "wins_barchart_1.RData")
+
+pts_linechart <- ggplot(na.omit(games[c("PTS_away", "PTS_home")]), aes(x = PTS_away)) +
+  geom_density(aes(fill = "PTS_away"), alpha = 0.5) + 
+  geom_density(aes(x = PTS_home, fill = "PTS_home"), alpha = 0.5) +  
+  labs(x = "Points", y = "Density") +
+  scale_fill_manual(values = c("PTS_away" = "#e74c3c", "PTS_home" = "#3498db"), 
+                    labels = c("Points scored by visiting teams", "Points scored by home teams")) +
+  theme_minimal() +
+  guides(fill = guide_legend(title = NULL))
+
+save(pts_linechart, file = "pts_linechart.RData")
+```
+
+Wins regression
+
+```{r}
+wins_long <- games |>
+  slice(rep(1:n(), each = 2)) |>
+  mutate(
+    Season = SEASON,
+    playoffs = playoffs,
+    Home = rep(c(0, 1), times = n()/2),
+    Win = ifelse((Home == 1 & HOME_TEAM_WINS == 1) | (Home == 0 & HOME_TEAM_WINS == 0), 1, 0)
+  ) |>
+  select(Home, playoffs, Season, Win)
+
+wins_fit <- lm(Win ~ Home, data = wins_long)
+glance(wins_fit)
+
+wins_table <- data.frame(
+  Intercept = c("40.57%"),
+  Home = c("+18.86%"),
+  P_value = c("0")
+)
+
+wins_regression_table <- knitr::kable(wins_table, col.names = c("Visiting team win rate (intercept)", "Home team win rate advantage (coefficient)", "P-value"), digits = 2)
+
+save(wins_regression_table, file = "wins_regression_table.RData")
+
+```
+
+Wins regression barchart
+```{r}
+wins_simplified_table_ <- data.frame(
+  Team = c("Visiting Team", "Home Team"),
+  WinRate = c(0.40571, 0.59428)
+)
+
+wins_regression_barchart <- ggplot(wins_simplified_table_, aes(x = "", y = WinRate, fill = Team)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Win rates in the NBA, 2004-2019",
+       y = "Win rate") +
+  scale_fill_manual(values = c("Home Team" = "#3498db", "Visiting Team" = "#e74c3c")) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  theme_minimal() +
+  theme(axis.title.x = element_blank(), axis.title.y = element_blank(), 
+        axis.text.x = element_blank(), axis.ticks.x = element_blank(), 
+        legend.position = "none") + 
+  annotate("text", x = 1, y = max(wins_simplified_table_$WinRate) * 1.15, 
+           label = "Home team win rate = 59.43%", color = "#000000") +
+  annotate("text", x = 1, y = max(wins_simplified_table_$WinRate) * 0.3,
+           label = "Visiting team win rate = 40.57%", color = "#000000")
+
+save(wins_regression_barchart, file = "wins_regression_barchart.RData")
+
+```
+
+Points regression
+
+```{r}
+pts_long <- games |>
+  select(SEASON, playoffs, PTS_home, PTS_away) |> 
+  na.omit() |>
+  pivot_longer(
+    cols = c(PTS_home, PTS_away), 
+    names_to = "Home",
+    values_to = "PTS"
+  ) |>
+  mutate(Home = as.integer(Home == "PTS_home"))
+
+pts_fit <- lm(PTS ~ Home, data = pts_long)
+glance(pts_fit)
+
+pts_table <- data.frame(
+  Intercept = c("98.69"),
+  Home = c("+3.01"),
+  P_value = c("1.11e-135")
+)
+
+pts_regression_table <- knitr::kable(pts_table, col.names = c("Average visiting team points (intercept)", "Average home court points advantage (coefficient)", "P-value"))
+
+save(pts_regression_table, file = "pts_regression_table.RData")
+```
+
+Points regression box plot
+
+```{r}
+pts_regression_boxplot <- ggplot(pts_long, 
+                      aes(x = factor(Home, 
+                                     labels = c("Visiting team", "Home team")), 
+                          y = PTS, fill = factor(Home))) +
+  geom_boxplot(width = 0.5, position = position_dodge(width = 0.6)) +
+  stat_summary(fun = "mean", geom = "text", aes(label = sprintf("%.2f", after_stat(y))),
+               position = position_dodge(width = 0.8), vjust = -0.5, size = 3) +
+  labs(x = "", y = "Points scored") + 
+  ggtitle("Home court points advantage in the NBA, 2004-2019") +
+  coord_cartesian(ylim = c(0, max(pts_long$PTS) * 1)) +
+  theme_minimal() +
+  scale_fill_manual(values = c("#3498db", "#e74c3c")) +
+  theme(legend.position = "none")
+
+save(pts_regression_boxplot, file = "pts_regression_boxplot.RData")
+```
+
+Seasons bivariate regression
+
+```{r}
+
+# wins 
+
+wins_season_fit <- lm(Win ~ Home + Season, data = wins_long)
+glance(wins_season_fit)
+
+# pts
+
+pts_season_fit <- lm(PTS ~ Home + SEASON, data = pts_long)
+glance(pts_season_fit)
+```
+
+Playoffs bivariate regression
+
+```{r}
+
+# wins
+
+wins_playoffs_fit <- lm(Win ~ Home + playoffs, data = wins_long)
+glance(wins_playoffs_fit)
+
+# points
+
+pts_playoffs_fit <- lm(PTS ~ Home + playoffs, data = pts_long)
+glance(wins_playoffs_fit)
+```
