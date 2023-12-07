@@ -57,7 +57,7 @@ Introduction graphs
 
 wins_barchart_1 <- ggplot(games, aes(x = factor(HOME_TEAM_WINS))) +
   geom_bar(aes(fill = factor(HOME_TEAM_WINS)), stat = "count") +
-  labs(y = "Count") +
+  labs(title = "Win frequency in the NBA, 2003-2019", y = "Count") +
   scale_x_discrete(labels = c("Visiting Team Won", "Home Team Won")) +
   geom_text(stat = "count", aes(label = ..count..), vjust = -0.5) +
   theme_minimal() +
@@ -69,9 +69,9 @@ save(wins_barchart_1, file = "wins_barchart_1.RData")
 pts_linechart <- ggplot(na.omit(games[c("PTS_away", "PTS_home")]), aes(x = PTS_away)) +
   geom_density(aes(fill = "PTS_away"), alpha = 0.5) + 
   geom_density(aes(x = PTS_home, fill = "PTS_home"), alpha = 0.5) +  
-  labs(x = "Points", y = "Density") +
+  labs(title = "Points scored in the NBA, 2003-2019", x = "Points", y = "Density") +
   scale_fill_manual(values = c("PTS_away" = "#e74c3c", "PTS_home" = "#3498db"), 
-                    labels = c("Points scored by visiting teams", "Points scored by home teams")) +
+                    labels = c("By visiting teams", "By home teams")) +
   theme_minimal() +
   guides(fill = guide_legend(title = NULL))
 
@@ -115,7 +115,7 @@ wins_simplified_table_ <- data.frame(
 
 wins_regression_barchart <- ggplot(wins_simplified_table_, aes(x = "", y = WinRate, fill = Team)) +
   geom_bar(stat = "identity") +
-  labs(title = "Win rates in the NBA, 2004-2019",
+  labs(title = "Win rates in the NBA, 2003-2019",
        y = "Win rate") +
   scale_fill_manual(values = c("Home Team" = "#3498db", "Visiting Team" = "#e74c3c")) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
@@ -124,9 +124,9 @@ wins_regression_barchart <- ggplot(wins_simplified_table_, aes(x = "", y = WinRa
         axis.text.x = element_blank(), axis.ticks.x = element_blank(), 
         legend.position = "none") + 
   annotate("text", x = 1, y = max(wins_simplified_table_$WinRate) * 1.15, 
-           label = "Home team win rate = 59.43%", color = "#000000") +
+           label = "Home team = 59.43%", color = "#000000") +
   annotate("text", x = 1, y = max(wins_simplified_table_$WinRate) * 0.3,
-           label = "Visiting team win rate = 40.57%", color = "#000000")
+           label = "Visiting team = 40.57%", color = "#000000")
 
 save(wins_regression_barchart, file = "wins_regression_barchart.RData")
 
@@ -170,7 +170,7 @@ pts_regression_boxplot <- ggplot(pts_long,
   stat_summary(fun = "mean", geom = "text", aes(label = sprintf("%.2f", after_stat(y))),
                position = position_dodge(width = 0.8), vjust = -0.5, size = 3) +
   labs(x = "", y = "Points scored") + 
-  ggtitle("Home court points advantage in the NBA, 2004-2019") +
+  ggtitle("Points scored in the NBA, 2003-2019") +
   coord_cartesian(ylim = c(0, max(pts_long$PTS) * 1)) +
   theme_minimal() +
   scale_fill_manual(values = c("#3498db", "#e74c3c")) +
