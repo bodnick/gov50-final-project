@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["coding.nb.html","games_details.csv","games.csv","graphs.html","images/wins-plot-1.png","images/wins-plot-2.png","images/wins-plot-3.png","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-2-2.png","index_files/figure-html5/unnamed-chunk-2-3.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-3-2.png","index_files/figure-html5/unnamed-chunk-3-3.png","index_files/figure-html5/wins-plot\"-1.png","index_files/figure-html5/wins-plot\"-2.png","index_files/figure-html5/wins-plot\"-3.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","players.csv","teams.csv"]}
+  {"type":"character","attributes":{},"value":["coding.nb.html","games_details.csv","games.csv","graphs.html","images/wins-plot-1.png","images/wins-plot-2.png","images/wins-plot-3.png","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-1-3.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-2-2.png","index_files/figure-html5/unnamed-chunk-2-3.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-3-2.png","index_files/figure-html5/unnamed-chunk-3-3.png","index_files/figure-html5/wins-plot\"-1.png","index_files/figure-html5/wins-plot\"-2.png","index_files/figure-html5/wins-plot\"-3.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","players.csv","teams.csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1517,44 +1517,25 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<p>Milestone 1:</p>
-<p>I am interested in exploring data related to political science, economics, and sports. I have a lot of ideas related to sports. I might look into the home court advantage in professional sports; this is my favorite idea. I could also look into salary caps in the NBA: how does the distribution of player salaries within a team affect its performance in the NBA? Another idea – what is the short-term and long-term economic impact on cities that host major sports events, like the Olympics or the FIFA World Cup?</p>
-<p>Milestone 2:</p>
-<p>In most professional sports, teams win more often when they play games at home as opposed to away (Moskowitz &amp; Wertheim 2012). In this study, I examine the home court advantage in National Basketball Association games. I hypothesize that (1) the home team wins games more often than the visiting team and (2) hometown crowds are a major cause of this advantage. Most of the fans in the crowd support the hometown team and will cheer for that team; the crowd noise could potentially motivate home team players and discourage the visiting team. Furthermore, the fans will respond negatively to fouls called against the hometeam, and positively to fouls called against the visiting team; the social pressure from this crowd noise could influence the referees to call fewer fouls on the home team and more on the visiting team (Nevill et al. 2002). My sample is NBA games played from 2004 to 2019. I am not looking at the 2020-21 season because of the complicated impacts of COVID-19 and the NBA bubble. I am using data from NBA Stats (the League’s official platform) that was scraped by data scientist Nathan Lauga (Kaggle, NBA Stats). My explanatory variable of interest is whether a team is playing at home or away. For each game, there is one team in each of these categories. I will use the outcome variable of the final score (measured in points scored by each team) to test the first hypothesis of whether the home team won games more often than the visiting team. If the home team won games at a significantly higher rate than the visiting team, this will provide support for my hypothesis; if the win rate is similar (or the visiting team won more games), this would provide evidence against my hypothesis. I will use two outcome variables to test the second hypothesis about the impact of the crowd on the home court advantage. First, I will compare the free throw percentages of the home vs. the visiting team as an indicator of the impact of the crowd on player performance. If the home team scored significantly more free throws on average compared to the visiting team, this would suggest that the crowd noise could be impacting free throw shooting to the advantage of the home team. If there was no difference between the home and the visiting team’s free throw rates, or if the visiting team made more free throws on average, then this would provide evidence against my hypothesis. Second, I will compare the number of personal fouls called on the home vs. the visiting team as an indicator of the impact of the crowd on refereeing. If the referees called significantly more personal fouls on the visiting team as opposed to the home team, this would suggest that the crowd noise could be leading the referees to officiate more favorably toward the home team. If there was no difference between the amount of fouls called on the home vs. visiting team, or more were called on the home team, then this would provide evidence against my hypothesis.</p>
-<p>Sources:
-<a href="https://www.amazon.com/Scorecasting-Hidden-Influences-Behind-Sports/dp/0307591808" class="uri">https://www.amazon.com/Scorecasting-Hidden-Influences-Behind-Sports/dp/0307591808</a>
-<a href="https://www.sciencedirect.com/science/article/abs/pii/S1469029201000334" class="uri">https://www.sciencedirect.com/science/article/abs/pii/S1469029201000334</a>
-<a href="https://www.kaggle.com/datasets/nathanlauga/nba-games" class="uri">https://www.kaggle.com/datasets/nathanlauga/nba-games</a></p>
-<p>Milestone 3:</p>
-<p>Here’s my data set, which includes statistics on final scores and free throw percentages.</p>
+<h1 id="introduction">Introduction</h1>
+<p>In most professional sports, teams win more often when they play games at home as opposed to away (Moskowitz &amp; Wertheim, 2012, p. 111). Sports analysts have attributed this phenomenon, known as the home court advantage, to a variety of factors — including the impact of hometown crowds on both gameplay and refereeing (i.e., resulting in refereeing biases toward the home team), tiring scheduling and travel for the visiting team, and unique arena characteristics that the home team is comfortable with (Moskowitz &amp; Wertheim, 2012, p. 116-167). In this project, I attempted to quantify the home court advantage in National Basketball Association games using NBA Stats data from 2003-2019 (Lauga, 2022).</p>
+<p>I hypothesized that home teams in the NBA (from 2003-2019) (1) won more games and (2) scored more points than visiting teams. My explanatory variable was whether a team is playing at home or away (which is binary). For each game, there is one team in each of these categories. I looked at two outcome variables to interrogate the two (related) parts of my hypothesis. First, I looked at whether or not a team won (which is binary). Second, I looked at how many points a team scored. These variables are related because whichever team scored the greater number of points wins the game. However, it was useful to look at both in order to quantify (1) how much more often the home vs. away team won and (2) how many more points the home vs. away team scored on average.</p>
+<p>If the home team won games at a significantly higher rate than the visiting team, this would provide support for my hypothesis; if the win rate was similar (or the visiting team won more games), this would provide evidence against my hypothesis. If the home team scored significantly more points on average compared to the visiting team, this would provide support for my hypothesis; if their average scores were similar (or the visiting team scored more points on average), this would provide evidence against my hypothesis.</p>
+<h1 id="data">Data</h1>
+<p>I used data scraped by data scientist Nathan Lauga from NBA Stats (the League’s official statistics platform) (Lauga, 2022). The data begins with the 2003-2004 season and ends with the 2021-2022 season. I decided to look at the portion of data from before the pandemic (up until the 2018-2019 season) in order to avoid potentially distortionary impacts of COVID-19 on the League. The data has one observation per game and basic statistics about each game, such as the number of points, rebounds, assists, etc. scored by each team. My wins outcome variable is coded as the binary variable HOME_TEAM_WINS; it is set to 1 if the home team won, and 0 if the visiting team won. Here is a plot that summarizes the HOME_TEAM_WINS outcome variable and shows that home teams won more frequently than visiting teams from 2003-2019:</p>
 <div class="layout-chunk" data-layout="l-body">
-<pre><code># A tibble: 26,651 × 21
-   GAME_DATE_EST GAME_ID GAME_STATUS_TEXT HOME_TEAM_ID VISITOR_TEAM_ID
-   &lt;date&gt;          &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt;           &lt;dbl&gt;
- 1 2022-12-22     2.22e7 Final              1610612740      1610612759
- 2 2022-12-22     2.22e7 Final              1610612762      1610612764
- 3 2022-12-21     2.22e7 Final              1610612739      1610612749
- 4 2022-12-21     2.22e7 Final              1610612755      1610612765
- 5 2022-12-21     2.22e7 Final              1610612737      1610612741
- 6 2022-12-21     2.22e7 Final              1610612738      1610612754
- 7 2022-12-21     2.22e7 Final              1610612751      1610612744
- 8 2022-12-21     2.22e7 Final              1610612752      1610612761
- 9 2022-12-21     2.22e7 Final              1610612745      1610612753
-10 2022-12-21     2.22e7 Final              1610612750      1610612742
-# ℹ 26,641 more rows
-# ℹ 16 more variables: SEASON &lt;dbl&gt;, TEAM_ID_home &lt;dbl&gt;,
-#   PTS_home &lt;dbl&gt;, FG_PCT_home &lt;dbl&gt;, FT_PCT_home &lt;dbl&gt;,
-#   FG3_PCT_home &lt;dbl&gt;, AST_home &lt;dbl&gt;, REB_home &lt;dbl&gt;,
-#   TEAM_ID_away &lt;dbl&gt;, PTS_away &lt;dbl&gt;, FG_PCT_away &lt;dbl&gt;,
-#   FT_PCT_away &lt;dbl&gt;, FG3_PCT_away &lt;dbl&gt;, AST_away &lt;dbl&gt;,
-#   REB_away &lt;dbl&gt;, HOME_TEAM_WINS &lt;dbl&gt;</code></pre>
+<p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
 </div>
-<p>Based on this data, I created three visualizations:</p>
+<p>“”</p>
+<h1 id="results">Results</h1>
+<h3 id="regression-1-wins">Regression #1: Wins</h3>
+<h3 id="regression-2-points">Regression #2: Points</h3>
+<h3 id="potential-confounders">Potential confounders</h3>
+<h1 id="conclusion">Conclusion</h1>
+<h1 id="sources">Sources</h1>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-2-2.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-2-3.png" width="624" /></p>
 </div>
-<p>Milestone 4:</p>
-<p>From 2014-2022 in the NBA, home teams won 58.70% of the time. I ran a univariate regression with whether a team was playing at home (1 if they were the home team, 0 if they were the visiting team) as my independent variable and their score as the dependent variable. Here are the results:</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <thead>
@@ -1571,8 +1552,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tbody>
 </table>
 </div>
-<p>According to the model, the home team enjoyed an average of a 2.82 point advantage from 2014-2022, which is significant at p &lt; 0.05 (p = 1.39e-129, a very tiny number, so the results are very significant). Therefore, the home court advantage clearly exists, with the home team having a moderate but significant points advantage over the visiting team.</p>
-<p>I also ran a regression with with whether a team was playing at home (1 if they were the home team, 0 if they were the visiting team) as my independent variable and their free throw rate as the dependent variable. Here are the results:</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <thead>
@@ -1589,9 +1568,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tbody>
 </table>
 </div>
-<p>According to the model, the home team scored 0.16% more free throws than the visiting team on average from 2014-2022. This is a small advantage and the p-value is 0.078, which is not significant at p &lt; 0.05. This means that if the null hypothesis is true, you would still expect to see the relationship observed about 7.8% of the time purely due to random chance. Therefore, there is a small, weak relationship between whether a team is playing at home and their free throw rate (or maybe none at all).</p>
-<p>Free throw percentages are the most direct way to measure the impact of the crowd on the players (even though it probably impacts many parts of game play) because they are consistently the same shot and the only difference between playing at home vs. away is whether the crowd is cheering vs. booing. I interpret the result of my model as an indicator that pressure from the home crowd directly on the players is not a major factor in home court advantage – although again, it could impact other parts of game play in different ways.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
