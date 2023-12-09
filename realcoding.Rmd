@@ -108,12 +108,12 @@ save(wins_regression_table, file = "wins_regression_table.RData")
 
 Wins regression barchart
 ```{r}
-wins_simplified_table_ <- data.frame(
+wins_simplified_table <- data.frame(
   Team = c("Visiting Team", "Home Team"),
   WinRate = c(0.40571, 0.59428)
 )
 
-wins_regression_barchart <- ggplot(wins_simplified_table_, aes(x = "", y = WinRate, fill = Team)) +
+wins_regression_barchart <- ggplot(wins_simplified_table, aes(x = "", y = WinRate, fill = Team)) +
   geom_bar(stat = "identity") +
   labs(title = "Win rates in the NBA, 2003-2019",
        y = "Win rate") +
@@ -123,9 +123,9 @@ wins_regression_barchart <- ggplot(wins_simplified_table_, aes(x = "", y = WinRa
   theme(axis.title.x = element_blank(), axis.title.y = element_blank(), 
         axis.text.x = element_blank(), axis.ticks.x = element_blank(), 
         legend.position = "none") + 
-  annotate("text", x = 1, y = max(wins_simplified_table_$WinRate) * 1.15, 
+  annotate("text", x = 1, y = max(wins_simplified_table$WinRate) * 1.15, 
            label = "Home team = 59.43%", color = "#000000") +
-  annotate("text", x = 1, y = max(wins_simplified_table_$WinRate) * 0.3,
+  annotate("text", x = 1, y = max(wins_simplified_table$WinRate) * 0.3,
            label = "Visiting team = 40.57%", color = "#000000")
 
 save(wins_regression_barchart, file = "wins_regression_barchart.RData")
@@ -188,10 +188,19 @@ Seasons bivariate regression
 wins_season_fit <- lm(Win ~ Home + Season, data = wins_long)
 glance(wins_season_fit)
 
+wins_season_fit_table <- modelsummary::modelsummary(wins_season_fit,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
+
 # pts
 
 pts_season_fit <- lm(PTS ~ Home + SEASON, data = pts_long)
 glance(pts_season_fit)
+pts_season_fit_table <- modelsummary::modelsummary(pts_season_fit,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
 ```
 
 Playoffs bivariate regression
@@ -202,10 +211,18 @@ Playoffs bivariate regression
 
 wins_playoffs_fit <- lm(Win ~ Home + playoffs, data = wins_long)
 glance(wins_playoffs_fit)
+wins_playoffs_fit_table <- modelsummary::modelsummary(wins_playoffs_fit,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
 
 # points
 
 pts_playoffs_fit <- lm(PTS ~ Home + playoffs, data = pts_long)
 glance(wins_playoffs_fit)
+pts_playoffs_fit_table <- modelsummary::modelsummary(pts_playoffs_fit,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
 ```
 
